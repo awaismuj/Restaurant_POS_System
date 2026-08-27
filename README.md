@@ -36,7 +36,7 @@ A full-featured **Restaurant POS System** built using the **MERN Stack** to stre
 ---
 <br>
 
-## � Environment Setup
+## ⚙️ Environment Setup
 
 This project uses two environment files:
 
@@ -46,11 +46,25 @@ Create a file named `.env` inside the `pos-backend` folder:
 ```env
 PORT=3000
 NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
 MONGODB_URI=mongodb://localhost:27017/pos-db
 JWT_SECRET=change_this_to_a_long_random_secret_key
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
-RAZORPAY_WEBHOOK_SECRET=your_razorpay_webhook_secret
+
+ADMIN_NAME=System Admin
+ADMIN_EMAIL=admin@restro.local
+ADMIN_PHONE=9999999999
+ADMIN_PASSWORD=admin123
+ADMIN_ROLE=Admin
+
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
+RAZORPAY_WEBHOOK_SECRET=
+```
+
+For MongoDB Atlas, use a connection string like:
+
+```env
+MONGODB_URI=mongodb+srv://YOUR_MONGODB_USER:YOUR_MONGODB_PASSWORD@cluster0.xxxxxx.mongodb.net/pos-db?retryWrites=true&w=majority
 ```
 
 ### 2) Frontend environment file
@@ -58,15 +72,25 @@ Create a file named `.env` inside the `pos-frontend` folder:
 
 ```env
 VITE_BACKEND_URL=http://localhost:3000
+VITE_RAZORPAY_KEY_ID=
 ```
 
 > These files are intentionally ignored by Git through each folder's `.gitignore` file, so real secrets are not pushed to the repository.
 
 ---
 
-## 🚀 Local Setup and Build Process
+## 🚀 Fresh Clone Setup
 
-### Install dependencies
+Run these commands from the project root:
+
+```bash
+cp pos-backend/.env.example pos-backend/.env
+cp pos-frontend/.env.example pos-frontend/.env
+
+# Edit the .env files and fill in your MongoDB, JWT, and frontend URLs
+```
+
+Then install dependencies:
 
 ```bash
 cd pos-backend
@@ -76,14 +100,57 @@ cd ../pos-frontend
 npm install
 ```
 
+---
+
+## 🗃️ Database Migration and Seed
+
+This project includes a simple MongoDB bootstrap flow so a new clone can be ready to run without manual database setup.
+
+### Run all database setup steps
+
+From the `pos-backend` folder:
+
+```bash
+npm run db:setup
+```
+
+This does the following:
+
+- connects to MongoDB
+- syncs database indexes
+- creates the default admin user if it does not already exist
+- sets up the app for immediate login after startup
+
+### Individual commands
+
+```bash
+npm run migrate
+npm run seed
+```
+
+Both commands trigger the same database bootstrap process. `seed` is useful when you want to create the initial admin account and default data only.
+
+### Default admin user
+
+The app seeds a default admin account automatically when no admin exists:
+
+```text
+Email: admin@restro.local
+Password: admin123
+```
+
+Change the password immediately after your first login in production.
+
+---
+
+## ▶️ Start the app
+
 ### Start backend
 
 ```bash
 cd pos-backend
 npm run dev
 ```
-
-This runs the Express server with Nodemon.
 
 ### Start frontend
 
@@ -92,24 +159,24 @@ cd pos-frontend
 npm run dev
 ```
 
-This starts the Vite development server on the default local port, usually:
+This starts the Vite dev server usually on:
 
 ```text
 http://localhost:5173
 ```
 
-### Production build
+---
 
-For the frontend, generate a production build:
+## 🏗️ Production build
+
+For the frontend:
 
 ```bash
 cd pos-frontend
 npm run build
 ```
 
-This creates a `dist` folder for deployment.
-
-For the backend, there is no separate build step; it runs directly with Node:
+For the backend:
 
 ```bash
 cd pos-backend
@@ -118,9 +185,9 @@ npm start
 
 ---
 
-## 🧩 Git Workflow for .env Files
+## 🧩 Git workflow for .env files
 
-Do not push the real `.env` files. They contain local secrets and should stay on your machine.
+Do not push real `.env` files. Keep them local.
 
 Safe workflow:
 
@@ -129,17 +196,15 @@ Safe workflow:
 cp pos-backend/.env.example pos-backend/.env
 cp pos-frontend/.env.example pos-frontend/.env
 
-# 2. Fill them with your actual local values
-# then run the app
-
+# 2. Fill in your real values
 # 3. Check what is modified
 git status
 
-# 4. Add only the safe files you want to commit
+# 4. Add only the safe files to the commit
 git add README.md pos-backend/.env.example pos-frontend/.env.example
 
 # 5. Commit
-git commit -m "Add environment examples and README documentation"
+git commit -m "Add environment examples and database bootstrap docs"
 
 # 6. Push
 git push origin main
