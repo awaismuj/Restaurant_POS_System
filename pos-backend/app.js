@@ -29,6 +29,8 @@ app.get("/", (req,res) => {
 app.use("/api/user", require("./routes/userRoute"));
 app.use("/api/order", require("./routes/orderRoute"));
 app.use("/api/table", require("./routes/tableRoute"));
+app.use("/api/category", require("./routes/categoryRoute"));
+app.use("/api/dish", require("./routes/dishRoute"));
 app.use("/api/payment", require("./routes/paymentRoute"));
 
 // Global Error Handler

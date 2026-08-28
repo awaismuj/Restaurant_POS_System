@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import restaurant from "../assets/images/restaurant-img.jpg"
-import logo from "../assets/images/logo.png"
 import Register from "../components/auth/Register";
 import Login from "../components/auth/Login";
 
@@ -34,7 +33,9 @@ const Auth = () => {
       {/* Right Section */}
       <div className="w-1/2 min-h-screen bg-[#1a1a1a] p-10">
         <div className="flex flex-col items-center gap-2">
-          <img src={logo} alt="Gen Z Pizza Logo" className="h-14 w-14 border-2 rounded-full p-1" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-yellow-400 bg-[#1f1f1f] p-1 text-2xl">
+            🍕
+          </div>
           <h1 className="text-lg font-semibold text-[#f5f5f5] tracking-wide">Gen Z Pizza</h1>
         </div>
 

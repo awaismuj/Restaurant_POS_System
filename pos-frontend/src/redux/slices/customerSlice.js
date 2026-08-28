@@ -40,6 +40,7 @@ const customerSlice = createSlice({
         removeCustomer: (state) => {
             state.customerName = "";
             state.customerPhone = "";
+            state.customerPhoneLocal = "";
             state.guests = 0;
             state.table = null;
         },

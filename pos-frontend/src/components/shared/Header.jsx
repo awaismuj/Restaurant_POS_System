@@ -2,7 +2,6 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
-import logo from "../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { IoLogOut } from "react-icons/io5";
 import { useMutation } from "@tanstack/react-query";
@@ -36,7 +35,9 @@ const Header = () => {
     <header className="flex justify-between items-center py-4 px-8 bg-[#1a1a1a]">
       {/* LOGO */}
       <div onClick={() => navigate("/")} className="flex items-center gap-2 cursor-pointer">
-        <img src={logo} className="h-8 w-8" alt="Gen Z Pizza logo" />
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f6b100] text-lg shadow-sm">
+          🍕
+        </span>
         <h1 className="text-lg font-semibold text-[#f5f5f5] tracking-wide">
           Gen Z Pizza
         </h1>
