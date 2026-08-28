@@ -1,6 +1,6 @@
-# 🤝 Contributing to Restaurant POS System
+# 🤝 Contributing to Gen Z Pizza POS System
 
-Thank you for considering contributing to the **Restaurant POS System**! Your help is essential for making this project even better. 💖
+Thank you for considering contributing to the **Gen Z Pizza POS System**! Your help is essential for making this project even better. 💖
 
 ## 🧾 Table of Contents
 - [How to Contribute](#-how-to-contribute)

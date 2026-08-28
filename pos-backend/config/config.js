@@ -11,7 +11,7 @@ const config = Object.freeze({
     razorpyWebhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET,
     defaultAdmin: {
         name: process.env.ADMIN_NAME || "System Admin",
-        email: process.env.ADMIN_EMAIL || "admin@restro.local",
+        email: process.env.ADMIN_EMAIL || "devops.awais@gmail.com",
         phone: Number(process.env.ADMIN_PHONE || 9999999999),
         password: process.env.ADMIN_PASSWORD || "admin123",
         role: process.env.ADMIN_ROLE || "Admin"

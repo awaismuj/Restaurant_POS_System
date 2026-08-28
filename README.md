@@ -1,6 +1,6 @@
-# 🍽️ **Restaurant POS System**  
+# 🍕 **Gen Z Pizza POS System**
 
-A full-featured **Restaurant POS System** built using the **MERN Stack** to streamline restaurant operations, enhance customer experience, and manage orders, payments, and inventory with ease.
+A full-featured **Gen Z Pizza POS System** built using the **MERN Stack** to streamline pizza shop operations, enhance customer experience, and manage orders, payments, and inventory with ease.
 
 ## ✨ **Features**
 
@@ -51,7 +51,7 @@ MONGODB_URI=mongodb://localhost:27017/pos-db
 JWT_SECRET=change_this_to_a_long_random_secret_key
 
 ADMIN_NAME=System Admin
-ADMIN_EMAIL=admin@restro.local
+ADMIN_EMAIL=devops.awais@gmail.com
 ADMIN_PHONE=9999999999
 ADMIN_PASSWORD=admin123
 ADMIN_ROLE=Admin
@@ -135,7 +135,7 @@ Both commands trigger the same database bootstrap process. `seed` is useful when
 The app seeds a default admin account automatically when no admin exists:
 
 ```text
-Email: admin@restro.local
+Email: devops.awais@gmail.com
 Password: admin123
 ```
 
@@ -218,7 +218,7 @@ If you use a different branch name, replace `main` with your branch name.
 
 ## �📺 **YouTube Playlist**
 
-🎬 Follow the complete tutorial series on building this Restaurant POS System on YouTube:  
+🎬 Follow the complete tutorial series on building this Gen Z Pizza POS System on YouTube:  
 👉 [Watch the Playlist](https://www.youtube.com/playlist?list=PL9OdiypqS7Nk0DHnSNFIi8RgEFJCIWB6X)  
 
 ## 📁 **Assets**
