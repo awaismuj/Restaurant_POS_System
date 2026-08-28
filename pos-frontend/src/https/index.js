@@ -20,6 +20,11 @@ export const createOrderRazorpay = (data) =>
 export const verifyPaymentRazorpay = (data) =>
   axiosWrapper.post("/api/payment//verify-payment", data);
 
+// Category & Dish Endpoints
+export const addCategory = (data) => axiosWrapper.post("/api/category/", data);
+export const addDish = (data) => axiosWrapper.post("/api/dish/", data);
+export const getCategories = () => axiosWrapper.get("/api/category");
+
 // Order Endpoints
 export const addOrder = (data) => axiosWrapper.post("/api/order/", data);
 export const getOrders = () => axiosWrapper.get("/api/order");

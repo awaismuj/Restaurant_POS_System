@@ -111,9 +111,9 @@ const Bill = () => {
             }, 1500);
           },
           prefill: {
-            name: customerData.name,
+            name: customerData.customerName,
             email: "",
-            contact: customerData.phone,
+            contact: customerData.customerPhone,
           },
           theme: { color: "#025cca" },
         };

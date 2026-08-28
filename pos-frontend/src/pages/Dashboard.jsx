@@ -19,11 +19,13 @@ const Dashboard = () => {
     document.title = "POS | Admin Dashboard"
   }, [])
 
-  const [isTableModalOpen, setIsTableModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalAction, setModalAction] = useState(null);
   const [activeTab, setActiveTab] = useState("Metrics");
 
   const handleOpenModal = (action) => {
-    if (action === "table") setIsTableModalOpen(true);
+    setModalAction(action);
+    setIsModalOpen(true);
   };
 
   return (
@@ -69,7 +71,9 @@ const Dashboard = () => {
         </div>
       }
 
-      {isTableModalOpen && <Modal setIsTableModalOpen={setIsTableModalOpen} />}
+      {isModalOpen && (
+        <Modal action={modalAction} setIsModalOpen={setIsModalOpen} />
+      )}
     </div>
   );
 };

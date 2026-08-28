@@ -14,8 +14,8 @@ const BottomNav = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [guestCount, setGuestCount] = useState(0);
-  const [name, setName] = useState();
-  const [phone, setPhone] = useState();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -23,19 +23,48 @@ const BottomNav = () => {
   const increment = () => {
     if(guestCount >= 6) return;
     setGuestCount((prev) => prev + 1);
-  }
+  };
   const decrement = () => {
     if(guestCount <= 0) return;
     setGuestCount((prev) => prev - 1);
-  }
+  };
 
   const isActive = (path) => location.pathname === path;
 
   const handleCreateOrder = () => {
+    // normalize phone before sending to store
+    const raw = phone || "";
+    // remove non-digit except leading +
+    let digits = raw.replace(/[^0-9]/g, "");
+    let full = raw.trim();
+
+    if (full.startsWith("+")) {
+      // normalize to + followed by digits
+      full = "+" + digits;
+    } else {
+      // if user entered leading 0, remove it
+      if (digits.startsWith("0")) digits = digits.replace(/^0+/, "");
+      // if the number appears to be a Pakistan mobile (starts with 3 and length 10)
+      if (digits.length === 10 && digits.startsWith("3")) {
+        full = "+92" + digits;
+      } else if (digits.length === 10) {
+        // unknown, still prefix +92 as requested
+        full = "+92" + digits;
+      } else if (digits.length === 11 && digits.startsWith("92")) {
+        full = "+" + digits;
+        digits = digits.replace(/^92/, "");
+      } else {
+        // fallback keep digits
+        full = digits;
+      }
+    }
+
+    const local = (full.startsWith("+92") ? full.replace(/[^0-9]/g, "").replace(/^92/, "") : digits).replace(/^0+/, "");
+
     // send the data to store
-    dispatch(setCustomer({name, phone, guests: guestCount}));
+    dispatch(setCustomer({ name, phone: full, phoneLocal: local, guests: guestCount }));
     navigate("/tables");
-  }
+  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
@@ -85,7 +114,7 @@ const BottomNav = () => {
         <div>
           <label className="block text-[#ababab] mb-2 mt-3 text-sm font-medium">Customer Phone</label>
           <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} type="number" name="" placeholder="+91-9999999999" id="" className="bg-transparent flex-1 text-white focus:outline-none"  />
+            <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="" placeholder="+9230xxxxxxxx" id="" className="bg-transparent flex-1 text-white focus:outline-none"  />
           </div>
         </div>
         <div>
