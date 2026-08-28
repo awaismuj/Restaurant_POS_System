@@ -5,8 +5,11 @@ const defaultHeader = {
   Accept: "application/json",
 };
 
+const backendBaseURL =
+  import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_URL || "";
+
 export const axiosWrapper = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: backendBaseURL,
   withCredentials: true,
   headers: { ...defaultHeader },
 });
